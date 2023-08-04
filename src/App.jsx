@@ -4,6 +4,12 @@ import viteLogo from '/vite.svg'
 import axios from 'axios'
 import './App.css'
 import PropsCompnent from './components/props'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './components/homePage'
+import About from './components/About'
+import Header from './components/header'
+import Index from './components/MUI'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +17,7 @@ function App() {
   const [data, setdata] = useState([])
   useEffect(()=>{
 async function lload(){
-console.log('laoded');
+
 setisLoading(true)
 // fetch('https://jsonplaceholder.typicode.com/todos/1')
 //       .then(response => response.json())
@@ -23,28 +29,19 @@ setisLoading(false)
 lload()
   },[])
   
- 
-  
 
+
+// console.log(imgList);
   return (
     <>
+    <Index/>
+    {/* <Header/>
+    {/* <HomePage/> */}
+   
     
-     
-    
-      {isLoading ? 'loading':
-      <>
-      {data.id}
-      {data.title}
-      </>
-
-      }
-      <hr/>
-      <h1>props component</h1>
-      jkzdhciod
-      <hr/>
-      <PropsCompnent fakeData={data}/>
-      <h1>Hi all of you</h1>
+  
     </>
+   
   )
 }
 
