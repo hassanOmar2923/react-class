@@ -13,19 +13,19 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography,Drawer } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export default function SideBar() {
+export default function SideBar({openDrawer,Toggle}) {
   const [open, setOpen] = useState(false);
-
+ 
   const handleClick = () => {
     setOpen(!open);
   };
 
   return (
     <Box>
-        <Box >
+        <Box  sx={{alignItems:'center'}}>
 
         <Typography variant='h6' > 
             Sample Dashboard
@@ -80,9 +80,78 @@ export default function SideBar() {
             </ListItemIcon>
             <ListItemText primary="Starred" />
           </ListItemButton>
+         
         </List>
       </Collapse>
     </List>
+
+
+    <Drawer
+    
+      open={openDrawer}
+      onClose={Toggle}
+    >
+      <Box >
+
+<Typography variant='h6' > 
+    Sample Dashboard
+</Typography></Box>
+    <List
+      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Nested List Items
+        </ListSubheader>
+      }
+    >
+        <Link to={'home'} sx={{textDecoration:'none'}}>
+        <ListItemButton >
+        <ListItemIcon>
+          <EqualizerIcon sx={{fontWeight:'bold'}} />
+        </ListItemIcon>
+        <ListItemText  >
+            <Typography sx={{fontWeight:'bold',color:'black',textDecoration:'none'}}>
+                Home
+            </Typography>
+        </ListItemText>
+      </ListItemButton>
+        </Link>
+        <Link to={'about'} sx={{fontWeight:'bold',color:'black',textDecoration:'none'}}>
+        <ListItemButton >
+        <ListItemIcon>
+          <EqualizerIcon />
+        </ListItemIcon>
+        <ListItemText  >
+            <Typography >
+                About
+            </Typography>
+        </ListItemText>
+      </ListItemButton>
+        </Link>
+      <ListItemButton onClick={handleClick}>
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItemButton>
+         
+        </List>
+      </Collapse>
+    </List>
+    </Drawer>
+
+
     </Box>
   );
 }

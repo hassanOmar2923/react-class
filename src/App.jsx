@@ -9,6 +9,8 @@ import HomePage from './components/homePage'
 import About from './components/About'
 import Header from './components/header'
 import Index from './components/MUI'
+import Login from './components/login'
+import PageNotFound from './pageNotFound'
 
 
 function App() {
@@ -34,11 +36,19 @@ lload()
 // console.log(imgList);
   return (
     <>
-    <Index/>
+   
     {/* <Header/>
     {/* <HomePage/> */}
    
-    
+   <Routes>
+   <Route path='/' element={<Login/>}/>
+   <Route path='*' element={<PageNotFound/>}/>
+
+    <Route path='Dashbard' element={<Index/>}>
+    <Route path='home' element={<HomePage/>}/>
+    <Route path='about' element={<About/>}/>
+    </Route>
+   </Routes> 
   
     </>
    
