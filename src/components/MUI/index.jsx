@@ -1,10 +1,15 @@
 import { Box, IconButton, Stack } from '@mui/material'
 import React from 'react'
 import SideBar from './sideBar'
-import {Outlet} from 'react-router-dom'
+import {Outlet, useNavigate} from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { contextExporter } from '../../context/AuthContext';
 export default function Index() {
+  
+    let curr=JSON.parse(localStorage.getItem('currentUser'))
+  const {logOut}=contextExporter()
     const [openDrawer, setopenDrawer] = useState(false);
     const Toggle=()=>{
       setopenDrawer(!openDrawer)
@@ -33,7 +38,11 @@ export default function Index() {
 
                 }}}>
                     <MenuIcon/></IconButton>
-                hassanOmar@gmail.com
+                    <Stack direction={'row'}>
+                {curr?.username}
+                        <IconButton onClick={logOut}><LogoutIcon/></IconButton>
+
+                    </Stack>
             </Box>
             <Outlet />
             </Box>

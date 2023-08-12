@@ -11,12 +11,14 @@ import Header from './components/header'
 import Index from './components/MUI'
 import Login from './components/login'
 import PageNotFound from './pageNotFound'
+import { contextExporter } from './context/AuthContext'
 
 
 function App() {
   const [count, setCount] = useState(0)
   const [isLoading, setisLoading] = useState(false)
   const [data, setdata] = useState([])
+  const {isloggedIn}=contextExporter()
   useEffect(()=>{
 async function lload(){
 
@@ -42,12 +44,17 @@ lload()
    
    <Routes>
    <Route path='/' element={<Login/>}/>
-   <Route path='*' element={<PageNotFound/>}/>
+<Route path='*' element={<PageNotFound/>}/>
+   {isloggedIn &&(
+<>
 
-    <Route path='Dashbard' element={<Index/>}>
-    <Route path='home' element={<HomePage/>}/>
-    <Route path='about' element={<About/>}/>
-    </Route>
+<Route path='Dashbard' element={<Index/>}>
+<Route path='home' element={<HomePage/>}/>
+<Route path='about' element={<About/>}/>
+</Route>
+</>
+   )}
+  
    </Routes> 
   
     </>
